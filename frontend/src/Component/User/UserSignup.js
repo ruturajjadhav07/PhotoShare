@@ -38,7 +38,7 @@ const UserSignup = () => {
         // console.log(response.data);
 
         setTimeout(() => {
-          navigate("/login");
+          navigate("/");
         }, 2000);
       })
       .catch((e) => {

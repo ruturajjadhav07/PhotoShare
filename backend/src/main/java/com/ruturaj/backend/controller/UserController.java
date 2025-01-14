@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ruturaj.backend.modal.User;
 import com.ruturaj.backend.service.UserService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/app")
 @CrossOrigin(origins = "http://localhost:3000/")
@@ -25,9 +27,15 @@ public class UserController {
         return userService.registerUser(user.getUsername(), user.getPassword(), user.getEmail(), user.getContact());
     }
 
-    // login user details
+    // Login user details
     @PostMapping("/login")
     public User login(@RequestBody User login) {
         return userService.login(login.getUsername(), login.getPassword());
+    }
+
+    // Fetch all users except the logged-in one
+    @GetMapping("/all")
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
     }
 }
