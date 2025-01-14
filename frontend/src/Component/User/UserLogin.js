@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
-const UserLogin = () => {
+const UserLogin = (props) => {
   const [user, setUser] = useState({ username: "", password: "" });
   const [error, setError] = useState(null);
 
@@ -14,27 +14,30 @@ const UserLogin = () => {
     setUser((u) => ({ ...u, [id]: value }));
   };
 
-    let navigate = useNavigate();
+  let navigate = useNavigate();
 
   const Submit = (e) => {
     e.preventDefault();
     Server.post("/login", user)
       .then((response) => {
-        setUser({ username: "", password: "" });
+        // setUser({ username: "", password: "" });
+        const loggedUserId = response.data;
+        localStorage.setItem("userId", loggedUserId.id);
+        const loggedUserusername = response.data;
+        localStorage.setItem("username", loggedUserusername.username);
         toast.success("Login successful!");
-        setInterval(()=>{
-            // navigate("/check")                                  redirect to main page
-        },2000)
+        setInterval(() => {
+          navigate("/posts"); // Redirect to main page after 1 seconds
+        }, 2000);
       })
       .catch((e) => {
         const errorMessage =
           e.response && e.response.data
             ? e.response.data
             : "An unexpected error occurred.";
-        // setError(errorMessage);
+        setError(errorMessage);
         toast.error(errorMessage);
       });
-
   };
 
   return (
