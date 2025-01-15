@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ruturaj.backend.modal.Post;
 import com.ruturaj.backend.modal.User;
@@ -13,32 +14,45 @@ import com.ruturaj.backend.repository.PostRepository;
 @Service
 public class PostService {
 
+    private final String path = "C:/Users/jadha/OneDrive/Pictures";
+
     @Autowired
     private PostRepository postRepository;
 
-    private PostService(PostRepository postRepository) {
-        this.postRepository = postRepository;
-    }
-
-    public Post post(String content, String img_url, User user) {
+    public Post post(String content, MultipartFile image, User user) {
         if (content == null || content.isEmpty()) {
             throw new IllegalArgumentException("Post content cannot be empty");
         }
 
-        if (img_url == null || img_url.isEmpty()) {
+        if (image == null || image.isEmpty()) {
             throw new IllegalArgumentException("Please select an image");
         }
 
         if (user == null) {
             throw new IllegalArgumentException("User not found");
         }
+
+        // Save the image to the file system
+        String fileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
+        String filePath = path + "/" + fileName; //  it is '/' for configure path check app properties
+
+        
+        try {
+            image.transferTo(new java.io.File(filePath)); // Save file
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to upload file: " + e.getMessage());
+        }
+        
+        String imageUrl = "http://localhost:8080/" + fileName;
+        
         Post post = new Post();
         post.setContent(content);
-        post.setImageUrl(img_url);
-        post.setTimestamp(LocalDateTime.now()); // Automatically set the timestamp
+        post.setImageUrl(imageUrl); // Store the local file image
+        post.setTimestamp(LocalDateTime.now());
         post.setUser(user);
-
+        
         return postRepository.save(post);
+        
     }
 
     public List<Post> findByUser(Long userId) {
@@ -48,5 +62,4 @@ public class PostService {
     public List<Post> getAllPosts() {
         return postRepository.findAll();
     }
-
 }
