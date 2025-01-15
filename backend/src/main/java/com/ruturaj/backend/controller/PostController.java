@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ruturaj.backend.modal.Post;
 import com.ruturaj.backend.modal.User;
@@ -29,11 +29,15 @@ public class PostController {
     private UserRepository userRepository;
 
     @PostMapping("/create")
-    public Post create(@RequestBody Post post, @RequestParam Long userId) {
-        // Fetch user data by ID
-        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
+    public Post create(@RequestParam("content") String content,
+            @RequestParam("image") MultipartFile image,
+            @RequestParam Long userId) {
 
-        return postService.post(post.getContent(), post.getImageUrl(), user);
+        // Fetch user data by ID
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        return postService.post(content, image, user);
     }
 
     @GetMapping("/all")
