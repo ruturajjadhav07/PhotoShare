@@ -41,10 +41,10 @@ const UserCreatePost = () => {
         setPost({ image: null, content: "" }); // Reset form
         setInterval(() => {
           navigate("/posts");
-        }, 200);
+        }, 2000);
       })
       .catch((e) => {
-        console.log(e.message);
+        // console.log(e.message);
         setError(e.response ? e.response.data : "An error occurred");
         toast.error(e.response ? e.response.data : "An error occurred");
       });
