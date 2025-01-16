@@ -36,7 +36,7 @@ const UserCreatePost = () => {
       },
     })
       .then((response) => {
-        console.log("success")
+        // console.log("success")
         toast.success("Posted Successfully");
         setPost({ image: null, content: "" }); // Reset form
         setInterval(() => {
