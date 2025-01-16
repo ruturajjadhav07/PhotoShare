@@ -57,6 +57,7 @@ const UserPost = () => {
           <div>
             {post.map((posts) => {
               const postDate = new Date(posts.timestamp).toLocaleDateString(); // Extract date amd convert to string
+              const PostTime = new Date(posts.timestamp).toLocaleTimeString(); // Extract time in hours
               return (
                 <div key={posts.id}>
                   <div className="d-flex justify-content-between align-items-center">
@@ -93,14 +94,14 @@ const UserPost = () => {
                       src={posts.imageUrl}
                     />
                     <div className="card-body">
-                      <p className="card-text">
+                      <p className="card-text-wrapper">
                         <div className="mt-2">
                           <i className="bi bi-heart mx-2"></i>
                           <i className="bi bi-chat mx-2"></i>
                         </div>
                         <b>{posts.user.username}</b> {posts.content}
                       </p>
-                      <p className="text-muted">Posted on: {postDate}</p>
+                      <p className="text-muted">Posted on: {postDate} at {PostTime}</p>
                     </div>
                   </div>
                   <hr />
