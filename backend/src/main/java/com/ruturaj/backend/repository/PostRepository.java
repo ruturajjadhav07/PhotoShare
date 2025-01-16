@@ -10,5 +10,8 @@ import com.ruturaj.backend.modal.Post;
 public interface PostRepository extends JpaRepository<Post, Long> {
 
     List<Post> findByUserId(Long userId);
+
+    boolean existsByIdAndUserId(Long postId, Long userId);
+
 }
  

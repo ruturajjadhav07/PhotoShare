@@ -34,25 +34,24 @@ public class PostService {
 
         // Save the image to the file system
         String fileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
-        String filePath = path + "/" + fileName; //  it is '/' for configure path check app properties
+        String filePath = path + "/" + fileName; // it is '/' for configure path check app properties
 
-        
         try {
             image.transferTo(new java.io.File(filePath)); // Save file
         } catch (Exception e) {
             throw new RuntimeException("Failed to upload file: " + e.getMessage());
         }
-        
+
         String imageUrl = "http://localhost:8080/" + fileName;
-        
+
         Post post = new Post();
         post.setContent(content);
         post.setImageUrl(imageUrl); // Store the local file image
         post.setTimestamp(LocalDateTime.now());
         post.setUser(user);
-        
+
         return postRepository.save(post);
-        
+
     }
 
     public List<Post> findByUser(Long userId) {
@@ -62,4 +61,19 @@ public class PostService {
     public List<Post> getAllPosts() {
         return postRepository.findAll();
     }
+
+    public void deleteById(Long postId, Long UserId) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("Post not found"));
+        if (!post.getUser().getId().equals(UserId)) {
+            throw new IllegalArgumentException("You are not owner of this post");
+        }
+
+        if (!postRepository.existsByIdAndUserId(postId, UserId)) {
+            throw new IllegalArgumentException("You are not authorized to delete this post");
+        }
+        
+        postRepository.delete(post);
+    }
+
 }
