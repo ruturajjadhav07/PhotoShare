@@ -19,6 +19,12 @@ public class PostService {
     @Autowired
     private PostRepository postRepository;
 
+
+    public Post getPostById(Long postId) {
+        return postRepository.findById(postId)
+            .orElseThrow(() -> new IllegalArgumentException("Post not found with ID: " + postId));
+    }
+
     public Post post(String content, MultipartFile image, User user) {
         if (content == null || content.isEmpty()) {
             throw new IllegalArgumentException("Post content cannot be empty");
@@ -76,4 +82,5 @@ public class PostService {
         postRepository.delete(post);
     }
 
+    
 }
