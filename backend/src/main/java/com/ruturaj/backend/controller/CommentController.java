@@ -1,43 +1,39 @@
 package com.ruturaj.backend.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ruturaj.backend.modal.Comment;
-import com.ruturaj.backend.modal.Post;
-import com.ruturaj.backend.modal.User;
 import com.ruturaj.backend.service.CommentService;
-import com.ruturaj.backend.service.PostService;
-import com.ruturaj.backend.service.UserService;
 
 @RestController
-@RequestMapping("app/comment")
-public class CommentController {
+@RequestMapping("/app/comment")
+@CrossOrigin(origins = "http://localhost:3000/")
 
+public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @Autowired
-    private UserService userService;
+    @PostMapping("/addcomment")
+    public Comment addComment(@RequestBody Map<String, Object> requestData) {
+        String content = (String) requestData.get("content");
+        Long userId = ((Number) requestData.get("userId")).longValue();
+        Long postId = ((Number) requestData.get("postId")).longValue();
+        return commentService.addComment(content, userId, postId);
+    }
 
-    @Autowired
-    private PostService postService;
-
-    @PostMapping("/add")
-    public ResponseEntity<Comment> addComment(@RequestBody Map<String, Object> payload) {
-        String content = (String) payload.get("content");
-        Long postId = Long.parseLong(payload.get("postId").toString());
-        Long userId = Long.parseLong(payload.get("userId").toString());
-
-        // Fetch User and Post
-        User user = userService.getUserById(userId);
-        Post post = postService.getPostById(postId);
-
-        // Add Comment
-        Comment comment = commentService.addComment(content, user, post);
-        return ResponseEntity.ok(comment);
+    @GetMapping("/getcomment")
+    public List<Comment> getComment( @RequestParam Long postId) {
+        return commentService.getComment(postId);
     }
 }
+
