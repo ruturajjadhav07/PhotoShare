@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.ruturaj.backend.modal.Comment;
-import com.ruturaj.backend.modal.Post;
 import com.ruturaj.backend.modal.User;
 
 import java.util.List;

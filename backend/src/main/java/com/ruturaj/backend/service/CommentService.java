@@ -52,14 +52,9 @@ public class CommentService {
 
     // See comments
 
-    public List<Comment> getComment( Long postId) {
-
-        // userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found " + userId));
+    public List<Comment> getComment(Long postId) {
 
         postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("Post not found " + postId));
-
-        // return commentRepository.findByUserIdAndPostId(user, post);
-        // return commentRepository.findByUserIdAndPostId(postId);
 
         return commentRepository.findByPostId(postId);
     }
