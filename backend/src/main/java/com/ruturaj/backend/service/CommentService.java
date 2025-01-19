@@ -10,6 +10,7 @@ import com.ruturaj.backend.modal.Post;
 import com.ruturaj.backend.modal.User;
 import com.ruturaj.backend.repository.CommentRepository;
 import com.ruturaj.backend.repository.PostRepository;
+import com.ruturaj.backend.repository.UserRepository;
 
 @Service
 public class CommentService {
@@ -17,36 +18,49 @@ public class CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
-     @Autowired
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private PostRepository postRepository;
 
+    // Add comment
+    public Comment addComment(String content, Long userId, Long postId) {
 
+        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        Post post = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("Post not found"));
 
-    public List<Comment> getCommentsByPost(Long postId) { // Fixed typo
-        return commentRepository.findByPost_Id(postId);
-    }
+        if (content == null || content.isEmpty()) {
+            throw new IllegalArgumentException("Empty comment cannot be posted");
+        }
 
-    public Comment addComment(String content, User user, Post post) {
-        // Validate inputs
         if (user == null) {
             throw new IllegalArgumentException("User not found");
         }
+
         if (post == null) {
-            throw new IllegalArgumentException("Post not found");
+            throw new IllegalArgumentException("User not found");
         }
 
-        // Create and save comment
         Comment comment = new Comment();
         comment.setContent(content);
         comment.setUser(user);
         comment.setPost(post);
-
         return commentRepository.save(comment);
+
     }
 
+    // See comments
 
-    public Post getPostById(Long postId) {
-        return postRepository.findById(postId)
-            .orElseThrow(() -> new IllegalArgumentException("Post not found with ID: " + postId));
+    public List<Comment> getComment( Long postId) {
+
+        // userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found " + userId));
+
+        postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("Post not found " + postId));
+
+        // return commentRepository.findByUserIdAndPostId(user, post);
+        // return commentRepository.findByUserIdAndPostId(postId);
+
+        return commentRepository.findByPostId(postId);
     }
 }
