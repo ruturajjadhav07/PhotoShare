@@ -47,11 +47,12 @@ const UserPost = () => {
     setSelectedPostId(postId); // Set the selected post ID
     Server.get(`/comment/getcomment?postId=${postId}`)
       .then((response) => {
-        console.log(comments)
+        // console.log(comments)
         setComment(response.data);
       })
       .catch((e) => {
-        console.log(e.response);
+        // console.log(e.response);
+        toast.error(e.response.data);
       });
   };
 
@@ -165,7 +166,7 @@ const UserPost = () => {
       >
         <div
           className="modal-dialog modal-dialog-scrollable opacity-100"
-          style={{ marginTop: "130px", maxHeight:"500px"}}
+          style={{ marginTop: "130px", maxHeight: "500px" }}
         >
           <div className="modal-content">
             <div className="modal-header">
@@ -184,8 +185,12 @@ const UserPost = () => {
               {comments.length > 0 ? (
                 comments.map((comment, id) => (
                   <div key={id}>
-                    <p style={{marginBottom:"0px"}}><strong>{comment.user.username}</strong></p>
-                    <p><small>{comment.content}</small></p>
+                    <p style={{ marginBottom: "0px" }}>
+                      <strong>{comment.user.username}</strong>
+                    </p>
+                    <p>
+                      <small>{comment.content}</small>
+                    </p>
                   </div>
                 ))
               ) : (
