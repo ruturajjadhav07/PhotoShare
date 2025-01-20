@@ -1,6 +1,5 @@
 package com.ruturaj.backend.modal;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,7 +29,7 @@ public class Comment {
     @JoinColumn(name="user_id") 
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="post_id")
     private Post post;
 
