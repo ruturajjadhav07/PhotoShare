@@ -145,7 +145,7 @@ const UserPost = () => {
                   <div className="">
                     <img
                       alt="post"
-                      className="card-img-top"
+                      className="card-img-top img-fluid border"
                       src={posts.imageUrl}
                     />
                     <div className="card-body">
