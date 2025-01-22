@@ -2,9 +2,10 @@
 .sticky-top {
   /* position: -webkit-sticky;  */
   position: sticky;
-  top: 0;
+  top: -2px;
   background-color: white; 
   padding: 5px;
   z-index: 1020; 
   transition: all 0.3s ease-in-out;
 }
+ 
