@@ -37,6 +37,11 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public Post orElseThrow(Object object) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'orElseThrow'");
+    }
+
 
 
 }
