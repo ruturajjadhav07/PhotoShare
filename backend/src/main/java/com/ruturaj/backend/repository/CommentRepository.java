@@ -6,18 +6,21 @@ import org.springframework.stereotype.Repository;
 import com.ruturaj.backend.modal.Comment;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
+    Optional<Comment> findById(Long id);
+
+
     List<Comment> findByUserId(Long userId);
 
-    // List<Comment> findByPostId(Post postId);
 
     List<Comment> findByPostId(Long postId);  
 
 
-    List<Comment> findByUserIdAndPostId(Long userId, Long postId);
+    boolean findByUserIdAndPostId(Long userId, Long postId);
 
     
 

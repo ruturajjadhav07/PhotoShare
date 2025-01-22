@@ -59,6 +59,56 @@ public class CommentService {
         return commentRepository.findByPostId(postId);
     }
 
+    // public void deleteComment(long commentId, long userId, long postId) {
+
+    //     // Fetch the comment from the repository
+    //     Comment comment = commentRepository.findById(commentId)
+    //             .orElseThrow(() -> new IllegalArgumentException("Comment not found"));
+
+    //     // Check if the user owns the comment
+    //     if (!comment.getUser().getId().equals(userId)) {
+    //         throw new IllegalArgumentException("User not authorized to delete this comment");
+    //     }
+
+    //     // Check if the comment belongs to the specified post
+    //     if (!comment.getPost().getId().equals(postId)) {
+    //         throw new IllegalArgumentException("Comment does not belong to the specified post");
+    //     }
+
+    //     if (!commentRepository.findByUserIdAndPostId(userId, postId)) {
+    //         throw new IllegalArgumentException("You cannot delete comment");
+    //     }
+
+    //     // Delete the comment
+    //     commentRepository.delete(comment);
+    // }
+
+
+    public void deleteComment(long commentId, long userId, long postId) {
+        System.out.println("Attempting to delete comment with ID: " + commentId);
     
+        // Fetch the comment
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new IllegalArgumentException("Comment not found"));
+    
+        System.out.println("Comment fetched: " + comment);
+    
+        // Validate ownership and post association
+        if (!comment.getUser().getId().equals(userId)) {
+            throw new IllegalArgumentException("User not authorized to delete this comment");
+        }
+        if (!comment.getPost().getId().equals(postId)) {
+            throw new IllegalArgumentException("Comment does not belong to the specified post");
+        }
+    
+        // Optional check if comment exists by user and post (if necessary)
+        // if (!commentRepository.existsByUserIdAndPostId(userId, postId)) {
+        //     throw new IllegalArgumentException("You cannot delete comment");
+        // }
+    
+        // Delete the comment
+        commentRepository.delete(comment);
+        System.out.println("Comment deleted successfully.");
+    }
     
 }
