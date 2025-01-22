@@ -47,7 +47,7 @@ const UserPost = () => {
     setSelectedPostId(postId); // Set the selected post ID
     Server.get(`/comment/getcomment?postId=${postId}`)
       .then((response) => {
-        // console.log(comments)
+        // console.log(comments);
         setComment(response.data);
       })
       .catch((e) => {
@@ -77,6 +77,23 @@ const UserPost = () => {
       .catch((e) => {
         toast.error("Failed to add comment");
         console.error(e.response?.data || e.message);
+      });
+  };
+
+  // deleteComment
+  const commentDelete = (commentId) => {
+    // e.preventDefault();
+    Server.delete(
+      `/comment/deletecomment?commentId=${commentId}&userId=${userId}&postId=${selectedPostId}`
+    )
+      .then((response) => {
+        // console.log(response.data);
+        toast.success("Comment Deleted Successfully");
+      })
+      .catch((e) => {
+        // console.log(e.response.data);
+        setError(e.response.data);
+        toast.error(e.response.data);
       });
   };
 
@@ -186,7 +203,31 @@ const UserPost = () => {
                 comments.map((comment, id) => (
                   <div key={id}>
                     <p style={{ marginBottom: "0px" }}>
-                      <strong>{comment.user.username}</strong>
+                      <div className="d-flex justify-content-between align-items-center">
+                        <strong>{comment.user.username}</strong>
+                        <div className="dropdown">
+                          <i
+                            className="bi bi-three-dots-vertical"
+                            type="button"
+                            id="dropdownMenuButton"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          ></i>
+                          <ul
+                            className="dropdown-menu"
+                            aria-labelledby="dropdownMenuButton"
+                          >
+                            <li>
+                              <a
+                                className="dropdown-item btn text-danger"
+                                onClick={() => commentDelete(comment.id)}
+                              >
+                                Delete
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
                     </p>
                     <p>
                       <small>{comment.content}</small>

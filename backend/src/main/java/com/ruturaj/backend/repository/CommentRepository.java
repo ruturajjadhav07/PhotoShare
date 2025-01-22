@@ -20,7 +20,10 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     List<Comment> findByPostId(Long postId);  
 
 
-    boolean findByUserIdAndPostId(Long userId, Long postId);
+    // boolean findByUserIdAndPostId(Long userId, Long postId);
+
+
+    boolean existsByUserIdAndPostId(long userId, long postId);
 
     
 
