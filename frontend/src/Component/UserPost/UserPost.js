@@ -5,7 +5,7 @@ import Server from "../../Server/Server";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-
+ 
 const UserPost = () => {
   const [post, setPost] = useState([]);
   const [error, setError] = useState(null);
@@ -101,13 +101,14 @@ const UserPost = () => {
     <div className="container">
       <div className="row">
         <div className="col">
-          <div className="d-flex justify-content-between align-items-center sticky-top mt-1">
-            <h2>{username}</h2>
+          <div className="d-flex justify-content-between align-items-center sticky-top">
+            <h2>{username}</h2> 
             <a className="btn btn-dark" href="/posts/createpost">
               Post
             </a>
+            <a className="btn btn-warning" href="/posts/useredit">Profile</a>
           </div>
-          <hr />
+          <hr style={{margin:"0px"}}/>
           {error && <div className="alert alert-danger">{error}</div>}
           <div>
             {post.map((posts) => {
@@ -115,7 +116,7 @@ const UserPost = () => {
               const PostTime = new Date(posts.timestamp).toLocaleTimeString();
               return (
                 <div key={posts.id}>
-                  <div className="d-flex justify-content-between align-items-center">
+                  <div className="d-flex justify-content-between align-items-center mt-1">
                     <h3>{posts.user.username}</h3>
                     <h3>
                       <div className="dropdown">
@@ -147,10 +148,15 @@ const UserPost = () => {
                       alt="post"
                       className="card-img-top img-fluid border"
                       src={posts.imageUrl}
+                      style={{
+                        maxHeight: "660px", // Prevent excessively tall images
+                        objectFit: "cover", // Ensure the image covers the area without distortion
+                        width: "100%", // Make the image responsive
+                      }}
                     />
                     <div className="card-body">
-                      <p className="card-text-wrapper">
-                        <div className="mt-2">
+                      <p className="card-text-wrapper" style={{marginBottom:"0"}}>
+                        <div className="">
                           <i className="bi bi-heart btn"></i>
                           <i
                             className="bi bi-chat btn"
@@ -166,7 +172,7 @@ const UserPost = () => {
                       </p>
                     </div>
                   </div>
-                  <hr />
+                  <hr style={{margin:"0"}}/>
                 </div>
               );
             })}

@@ -65,7 +65,7 @@ public class UserService {
         if (user == null) {
             throw new IllegalArgumentException("User not found");
         }
-        if (!password.equals(user.getPassword()) ) {
+        if (!password.equals(user.getPassword())) {
             throw new IllegalArgumentException("Incorrect Password");
         }
 
@@ -78,6 +78,34 @@ public class UserService {
 
     public User getUserById(Long userId) {
         return userRepository.findById(userId)
-            .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + userId));
+                .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + userId));
+    }
+ 
+    // User Edit
+
+    public User editUser(Long userId, String username, String password, String email, String contact) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User Id not found"));
+
+        if (username == null || username.isEmpty()) {
+            throw new IllegalArgumentException("Username cannot be empty");
+        }
+        if (password == null || password.isEmpty()) {
+            throw new IllegalArgumentException("Password cannot be empty");
+        }
+        if (email == null || email.isEmpty()) {
+            throw new IllegalArgumentException("Email cannot be empty");
+        }
+        if (contact == null || contact.isEmpty()) {
+            throw new IllegalArgumentException("Contact cannot be empty");
+        }
+
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setContact(contact);
+
+        return userRepository.save(user);
     }
 }

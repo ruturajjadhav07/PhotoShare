@@ -13,7 +13,7 @@ import com.ruturaj.backend.service.UserService;
 
 import java.util.List;
 
-@RestController
+@RestController 
 @RequestMapping("/app")
 @CrossOrigin(origins = "http://localhost:3000/")
 public class UserController {
@@ -37,5 +37,13 @@ public class UserController {
     @GetMapping("/all")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
+    }
+
+    // Edit details
+
+    @PostMapping("/edituser")
+    public User editDetails(@RequestBody User user) {
+        return userService.editUser(user.getId(), user.getUsername(), user.getPassword(), user.getEmail(),
+                user.getContact());
     }
 }
