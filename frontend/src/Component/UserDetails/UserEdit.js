@@ -3,18 +3,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Server from "../../Server/Server";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const UserEdit = () => {
-  const userId = localStorage.getItem("userId"); // Getting userId from localStorage
-  console.log(userId);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { user } = location.state; // Get user data from state
 
   const [data, setData] = useState({
-    id: "", // Use 'id' here for consistency
-    username: "",
-    password: "",
-    email: "",
-    contact: "",
+    id: user.id || "",
+    username: user.username || "",
+    password: user.password || "",
+    email: user.email || "",
+    contact: user.contact || "",
   });
 
   const handleChange = (e) => {
@@ -25,8 +26,6 @@ const UserEdit = () => {
     }));
   };
 
-  let navigate = useNavigate();
-
   const back = (e) => {
     e.preventDefault();
     navigate("/posts");
@@ -36,7 +35,7 @@ const UserEdit = () => {
     e.preventDefault();
 
     const userData = {
-      id: userId,
+      id: data.id,
       username: data.username,
       password: data.password,
       email: data.email,
@@ -45,37 +44,17 @@ const UserEdit = () => {
 
     Server.post("/edituser", userData)
       .then((response) => {
-        console.log(response.data);
-        console.log("success");
         toast.success("Saved Successfully");
 
-        // Clear form fields after successful submission
-        setData({
-          id: userId,
-          username: "",
-          password: "",
-          email: "",
-          contact: "",
-        });
-
-        // Logout and redirect after a short delay
         setTimeout(() => {
           alert("Logging out");
           navigate("/"); // Redirect to login page
         }, 2000);
       })
       .catch((e) => {
-        console.log(e);
         toast.error(e.response?.data || "Unexpected Error");
       });
   };
-
-  useEffect(() => {
-    if (!userId) {
-      // Redirect to login page if userId is missing
-      navigate("/login");
-    }
-  }, [userId, navigate]);
 
   return (
     <div className="container-fluid vh-100 d-flex justify-content-center align-items-center">
@@ -138,6 +117,6 @@ const UserEdit = () => {
       <ToastContainer />
     </div>
   );
-}; 
+};
 
 export default UserEdit;

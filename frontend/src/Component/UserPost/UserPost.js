@@ -106,7 +106,7 @@ const UserPost = () => {
             <a className="btn btn-dark" href="/posts/createpost">
               Post
             </a>
-            <a className="btn btn-warning" href="/posts/useredit">Profile</a>
+            <a className="btn btn-warning" href="/posts/userdetails">Profile</a>
           </div>
           <hr style={{margin:"0px"}}/>
           {error && <div className="alert alert-danger">{error}</div>}

@@ -3,6 +3,7 @@ package com.ruturaj.backend.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,7 @@ import com.ruturaj.backend.service.UserService;
 
 import java.util.List;
 
-@RestController 
+@RestController
 @RequestMapping("/app")
 @CrossOrigin(origins = "http://localhost:3000/")
 public class UserController {
@@ -37,6 +38,13 @@ public class UserController {
     @GetMapping("/all")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
+    }
+
+    // Particular user details
+
+    @GetMapping("/user/{userId}")
+    public User getUserById(@PathVariable long userId) {
+        return userService.getUserById(userId);
     }
 
     // Edit details
