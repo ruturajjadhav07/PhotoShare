@@ -13,5 +13,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     boolean existsByIdAndUserId(Long postId, Long userId);
 
+    List<Post> findAllByOrderByTimestampDesc();
+
 }
-  

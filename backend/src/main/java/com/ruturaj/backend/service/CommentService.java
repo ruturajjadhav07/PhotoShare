@@ -39,7 +39,7 @@ public class CommentService {
         }
 
         if (post == null) {
-            throw new IllegalArgumentException("User not found");
+            throw new IllegalArgumentException("Post not found");
         }
 
         Comment comment = new Comment();
@@ -74,7 +74,7 @@ public class CommentService {
         boolean isPostOwner = comment.getPost().getUser().getId().equals(userId);
 
         if (!isCommentOwner && !isPostOwner) {
-            throw new IllegalArgumentException("User not authorized to delete this comment");
+            throw new IllegalArgumentException("You cannot delete this comment");
         }
 
         // Delete the comment
