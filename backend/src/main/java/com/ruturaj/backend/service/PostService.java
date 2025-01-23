@@ -19,15 +19,14 @@ public class PostService {
     @Autowired
     private PostRepository postRepository;
 
-
     public Post getPostById(Long postId) {
         return postRepository.findById(postId)
-            .orElseThrow(() -> new IllegalArgumentException("Post not found with ID: " + postId));
+                .orElseThrow(() -> new IllegalArgumentException("Post not found with ID: " + postId));
     }
 
     public Post post(String content, MultipartFile image, User user) {
         if (content == null || content.isEmpty()) {
-            throw new IllegalArgumentException("Post content cannot be empty");
+            throw new IllegalArgumentException("Post caption cannot be empty");
         }
 
         if (image == null || image.isEmpty()) {
@@ -64,23 +63,26 @@ public class PostService {
         return postRepository.findByUserId(userId);
     }
 
+    // public List<Post> getAllPosts() {
+    // return postRepository.findAll();
+    // }
+
     public List<Post> getAllPosts() {
-        return postRepository.findAll();
+        return postRepository.findAllByOrderByTimestampDesc(); // Fetch posts sorted by timestamp
     }
 
     public void deleteById(Long postId, Long UserId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("Post not found"));
         if (!post.getUser().getId().equals(UserId)) {
-            throw new IllegalArgumentException("You are not owner of this post");
+            throw new IllegalArgumentException("You cannot delete this post");
         }
 
         if (!postRepository.existsByIdAndUserId(postId, UserId)) {
-            throw new IllegalArgumentException("You are not authorized to delete this post");
+            throw new IllegalArgumentException("You cannot delete this post");
         }
-        
+
         postRepository.delete(post);
     }
 
-    
 }

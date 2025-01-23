@@ -76,7 +76,7 @@ const UserPost = () => {
       })
       .catch((e) => {
         toast.error("Failed to add comment");
-        console.error(e.response?.data || e.message);
+        // console.error(e.response?.data || e.message);
       });
   };
 
@@ -92,7 +92,7 @@ const UserPost = () => {
       })
       .catch((e) => {
         // console.log(e.response.data);
-        setError(e.response.data);
+        // setError(e.response.data);
         toast.error(e.response.data);
       });
   };
