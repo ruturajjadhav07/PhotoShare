@@ -34,12 +34,16 @@ const UserDetails = () => {
     navigate("/posts/userdetails/useredit", { state: { user } }); // Pass user data as state
   };
 
+  const userDelete = (e,user) => {
+    e.preventDefault();
+    navigate("/posts/userdetails/userdelete");
+  };
   return (
     <div className="container-fluid vh-100 d-flex justify-content-center align-items-center">
       {error && <div className="alert alert-danger">{error}</div>}
       {userDetails.map((user, id) => (
         <form
-          className="border p-4"
+          className="border p-4 shadow-lg"
           style={{ maxWidth: "400px", width: "100%" }}
           key={id}
         >
@@ -79,8 +83,11 @@ const UserDetails = () => {
           >
             Edit Details
           </button>
-          <button className="btn btn-secondary w-100" onClick={back}>
+          <button className="btn btn-secondary w-100 my-2" onClick={back}>
             Back
+          </button>
+          <button className="btn btn-danger w-100 my-2" onClick={userDelete}>
+            Delete Account
           </button>
         </form>
       ))}

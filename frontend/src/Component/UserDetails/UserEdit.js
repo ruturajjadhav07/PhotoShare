@@ -58,7 +58,7 @@ const UserEdit = () => {
 
   return (
     <div className="container-fluid vh-100 d-flex justify-content-center align-items-center">
-      <form className="border p-4" style={{ maxWidth: "400px", width: "100%" }}>
+      <form className="border p-4 shadow-lg" style={{ maxWidth: "400px", width: "100%" }}>
         <h1 className="text-center">Edit Details</h1>
         <div className="form-group">
           <input

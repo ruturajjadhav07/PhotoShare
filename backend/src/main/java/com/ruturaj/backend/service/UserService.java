@@ -80,7 +80,7 @@ public class UserService {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + userId));
     }
- 
+
     // User Edit
 
     public User editUser(Long userId, String username, String password, String email, String contact) {
@@ -107,5 +107,22 @@ public class UserService {
         user.setContact(contact);
 
         return userRepository.save(user);
+    }
+
+    // Delete User by own
+    public void delete(long userId, String password) {
+
+        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        if (password == null || password.isEmpty()) {
+            throw new IllegalArgumentException("Please enter password!");
+        }
+
+        if (!user.getPassword().equals(password)) {
+            throw new IllegalArgumentException("Password is Incorrect");
+        }
+
+        user.setPassword(password);
+        userRepository.deleteById(userId);
     }
 }
