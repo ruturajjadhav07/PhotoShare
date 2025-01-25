@@ -2,11 +2,13 @@ package com.ruturaj.backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ruturaj.backend.modal.User;
@@ -53,5 +55,10 @@ public class UserController {
     public User editDetails(@RequestBody User user) {
         return userService.editUser(user.getId(), user.getUsername(), user.getPassword(), user.getEmail(),
                 user.getContact());
+    }
+
+    @DeleteMapping("/delete/{userId}")
+    public void delete(@PathVariable long userId, @RequestParam String password) {
+        userService.delete(userId, password);
     }
 }
