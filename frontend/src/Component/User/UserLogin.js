@@ -44,7 +44,7 @@ const UserLogin = (props) => {
     <div>
       <div
         className="container-fluid"
-        style={{ backgroundColor: "aliceblue", minHeight: "88vh" ,paddingTop:"50px"}}
+        style={{ backgroundColor: "aliceblue", minHeight: "88vh", paddingTop: "50px" }}
       >
         <div
           className="row align-items-center justify-content-center"
@@ -62,23 +62,23 @@ const UserLogin = (props) => {
                 textShadow: "2px 2px 8px rgba(0,0,0,0.2)",
               }}
             >
-              Welcome to <b>photoShare</b>
+              Welcome to <b>PhotoShare</b>
             </h1>
             <p style={{ fontSize: "1.2rem", color: "#555", lineHeight: "1.5" }}>
-              Discover, share, and connect through the beauty of photography.
-              Join the community and share your moments with the world.
+              🌟 Discover. Share. Connect. 🌟
             </p>
-            <h1
-              style={{
-                fontSize: "2.5rem",
-                color: "#FF6347",
-                fontWeight: "bold",
-                marginTop: "30px",
-                textShadow: "2px 2px 8px rgba(0,0,0,0.2)",
-              }}
-            >
-              Post, Comment, and Like
-            </h1>
+            <p style={{ fontSize: "1.2rem", color: "#555", lineHeight: "1.5" }}>
+              Unleash your creativity and showcase your world through stunning photography.
+              ✨ Join a vibrant community of creators and photography enthusiasts.
+            </p>
+            <h3 style={{ fontSize: "1.5rem", color: "#0d6efd", fontWeight: "bold" }}>
+              📸 Post your moments  
+              💬 Engage with comments  
+              ❤️ Spread love with likes
+            </h3>
+            <p style={{ fontSize: "1.2rem", color: "#555", lineHeight: "1.5" }}>
+              Let your photos tell a story. Start sharing today!
+            </p>
           </div>
 
           <div

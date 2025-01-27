@@ -63,10 +63,6 @@ public class PostService {
         return postRepository.findByUserId(userId);
     }
 
-    // public List<Post> getAllPosts() {
-    // return postRepository.findAll();
-    // }
-
     public List<Post> getAllPosts() {
         return postRepository.findAllByOrderByTimestampDesc(); // Fetch posts sorted by timestamp
     }
@@ -78,9 +74,9 @@ public class PostService {
             throw new IllegalArgumentException("You cannot delete this post");
         }
 
-        if (!postRepository.existsByIdAndUserId(postId, UserId)) {
-            throw new IllegalArgumentException("You cannot delete this post");
-        }
+        // if (!postRepository.existsByIdAndUserId(postId, UserId)) {
+        // throw new IllegalArgumentException("You cannot delete this post");
+        // }
 
         postRepository.delete(post);
     }

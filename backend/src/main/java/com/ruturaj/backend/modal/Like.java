@@ -16,7 +16,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "likes", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"user_id", "post_id"})  // Ensures one like per user-post combination
+        @UniqueConstraint(columnNames = { "user_id", "post_id" }) // Ensures one like per user-post combination
 })
 public class Like {
 

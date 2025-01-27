@@ -13,10 +13,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    private UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
     // user register service
     public User registerUser(String username, String password, String email, String contact) {
 

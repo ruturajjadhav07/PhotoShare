@@ -38,9 +38,10 @@ public class CommentController {
     }
 
     @DeleteMapping("/deletecomment")
-    public void deleteComment(@RequestParam("commentId") long commentId, @RequestParam("userId") long userId,
+    public String deleteComment(@RequestParam("commentId") long commentId, @RequestParam("userId") long userId,
             @RequestParam("postId") long postId) {
         commentService.deleteComment(commentId, userId, postId);
+        return "Comment deleted successfully";
     }
 
 }
