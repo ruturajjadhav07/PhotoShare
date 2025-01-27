@@ -24,7 +24,7 @@ public class LikeService {
     @Autowired
     private PostRepository postRepository;
 
-    public Like addLike(long userId, long postId) {
+    public Like likePost(long userId, long postId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         Post post = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("Post not found"));

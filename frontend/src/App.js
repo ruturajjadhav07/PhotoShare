@@ -6,7 +6,6 @@ import UserPost from "./Component/UserPost/UserPost";
 import UserCreatePost from "./Component/UserPost/UserCreatePost";
 import UserEdit from "./Component/UserDetails/UserEdit";
 import UserDetails from "./Component/UserDetails/UserDetails";
-import userDelete from "./Component/UserActions/UserDelete";
 import UserDelete from "./Component/UserActions/UserDelete";
 const App = () => {
   return (

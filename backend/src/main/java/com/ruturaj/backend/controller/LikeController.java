@@ -26,7 +26,7 @@ public class LikeController {
     // Add Like
     @PostMapping("/addlike")
     public Like addLike(@RequestParam long userId, @RequestParam long postId) {
-        return likeService.addLike(userId, postId);
+        return likeService.likePost(userId, postId);
         // return null;
     }
 

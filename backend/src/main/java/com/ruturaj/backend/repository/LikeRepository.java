@@ -19,5 +19,4 @@ public interface LikeRepository extends JpaRepository<Like, Long> {
 
     void deleteByPostId(Long postId);
 
-    
 }
