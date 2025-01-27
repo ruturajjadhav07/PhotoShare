@@ -33,8 +33,8 @@ properties
 ```
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.datasource.url=jdbc:mysql://localhost:3306/socialmedia
-spring.datasource.username=password
-spring.datasource.password=rutu@1602
+spring.datasource.username=
+spring.datasource.password=
 spring.jpa.show-sql=true
 spring.jpa.hibernate.ddl-auto=update
 ```
