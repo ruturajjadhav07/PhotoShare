@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CommentModal from "./CommentModal";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-
+import UserLike from "./UserLike";
 
 const PostItem = ({ post, onDelete }) => {
   const [showModal, setShowModal] = useState(false);
@@ -22,7 +22,10 @@ const PostItem = ({ post, onDelete }) => {
           ></i>
           <ul className="dropdown-menu">
             <li>
-              <a className="dropdown-item btn text-danger" onClick={() => onDelete(post.id)}>
+              <a
+                className="dropdown-item btn text-danger"
+                onClick={() => onDelete(post.id)}
+              >
                 Delete
               </a>
             </li>
@@ -36,26 +39,25 @@ const PostItem = ({ post, onDelete }) => {
         style={{ maxHeight: "660px", objectFit: "cover", width: "100%" }}
       />
       <div className="card-body">
-        <p>
+        <p style={{ marginBottom: "0" }}>
           <b>{post.user.username}</b> {post.content}
         </p>
-        <p className="text-muted">
+        <p className="text-muted" style={{ marginBottom: "0" }}>
           Posted on: {postDate} at {postTime}
         </p>
-        <div>
+        <div style={{ padding: "0" }} className="d-flex align-items-center">
+          <UserLike postId={post.id} />
           <i
-            className="bi bi-heart btn"
-            style={{ cursor: "pointer", border: "none" }}
-          ></i>
-          <i
-            className="bi bi-chat btn"
+            className="bi bi-chat btn px-3"
             onClick={() => setShowModal(true)}
-            style={{ cursor: "pointer", border: "none"}}
+            style={{ cursor: "pointer", border: "none" }}
           ></i>
         </div>
       </div>
-      <hr />
-      {showModal && <CommentModal postId={post.id} onClose={() => setShowModal(false)} />}
+      <hr style={{ margin: "0" }} />
+      {showModal && (
+        <CommentModal postId={post.id} onClose={() => setShowModal(false)} />
+      )}
     </div>
   );
 };

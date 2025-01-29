@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,14 +24,21 @@ public class LikeController {
 
     // Add Like
     @PostMapping("/addlike")
-    public Like addLike(@RequestParam long userId, @RequestParam long postId) {
-        return likeService.likePost(userId, postId);
-        // return null;
+    public String addLike(@RequestParam long userId, @RequestParam long postId) {
+        Like like = likeService.likePost(userId, postId);
+        return (like == null) ? "Disliked" : "Liked";
     }
 
-    // See or get all like
-    @GetMapping("/alllike/{postId}")
-    public List<Like> getLikeByPost(@PathVariable long postId) {
-        return likeService.getLikesByPost(postId);
+    // Check all likes
+    @GetMapping("/alllikes")
+    public List<Like> allLikes() {
+        return likeService.allLikes();
     }
+
+    // Get likes of particular post
+    @GetMapping("/userlike")
+    public List<Like> userLike(@RequestParam long userId) {
+        return likeService.getLikesByUser(userId);
+    }
+
 }
