@@ -45,7 +45,7 @@ const UserPost = () => {
           Profile
         </a>
       </div>
-      <hr />
+      <hr style={{margin:"0"}}/>
       {error && <div className="alert alert-danger">{error}</div>}
       <PostList posts={post} onDelete={handleDelete} />
       <ToastContainer />

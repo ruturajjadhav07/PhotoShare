@@ -14,13 +14,18 @@ public class UserService {
     private UserRepository userRepository;
 
     // user register service
+
     public User registerUser(String username, String password, String email, String contact) {
 
+        String validUsername = "^[a-z]\\w{4,}$"; // Valid username regex
+        String validPassword = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d_@#$%^&+=]{8,}$"; // Valid password regex
+        String validEmail = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"; // Valid email regex
+
         if (username == null || username.isEmpty()) {
-            throw new IllegalArgumentException("Username cannot empty");
+            throw new IllegalArgumentException("Username cannot be empty");
         }
         if (password == null || password.isEmpty()) {
-            throw new IllegalArgumentException("Password cannot empty");
+            throw new IllegalArgumentException("Password cannot be empty");
         }
         if (email == null || email.isEmpty()) {
             throw new IllegalArgumentException("Email cannot be empty");
@@ -38,12 +43,33 @@ public class UserService {
         if (userRepository.existsByContact(contact)) {
             throw new IllegalArgumentException("Number already taken");
         }
-        User user = new User();
 
+        // Validate the username, password, and email with regex
+
+        if (username.equals(password)) {
+            throw new IllegalArgumentException("username and Password cannot be same");
+        }
+
+        if (!username.matches(validUsername)) {
+            throw new IllegalArgumentException("Username must be lowercase and at least 5 characters long");
+        }
+
+        if (!password.matches(validPassword)) {
+            throw new IllegalArgumentException(
+                    "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one digit, with optional special characters.");
+        }
+
+        if (!email.matches(validEmail)) {
+            throw new IllegalArgumentException("Invalid email format");
+        }
+
+        // Create and save the user
+        User user = new User();
         user.setUsername(username);
         user.setPassword(password);
         user.setEmail(email);
         user.setContact(contact);
+
         return userRepository.save(user);
     }
 

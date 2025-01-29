@@ -29,8 +29,14 @@ public class LikeService {
 
         Post post = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("Post not found"));
 
-        if (likeRepository.existsByUserIdAndPostId(userId, postId)) {
-            throw new IllegalArgumentException("You have already liked a post");
+        // if (likeRepository.existsByUserIdAndPostId(userId, postId)) {
+        // throw new IllegalArgumentException("You have already liked a post");
+        // }
+
+        Like existLike = likeRepository.findByUserIdAndPostId(userId, postId);
+        if (existLike != null) {
+            likeRepository.delete(existLike);
+            return null;
         }
 
         Like like = new Like();
@@ -40,11 +46,20 @@ public class LikeService {
 
     }
 
-    // Get likes by post
-    public List<Like> getLikesByPost(long postId) {
-        if (!likeRepository.existsByPostId(postId)) {
-            throw new IllegalArgumentException("Post not found");
-        }
-        return likeRepository.getByPostId(postId);
+    // check all likes
+    public List<Like> allLikes() {
+        return likeRepository.findAll();
     }
+
+    // get user likes to post
+
+    public List<Like> getLikesByUser(long userId) {
+        List<Like> likes = likeRepository.findLikeByUserId(userId);
+
+        // if (likes.isEmpty()) {
+        // throw new IllegalArgumentException("No likes found for the user");
+        // }
+        return likes;
+    }
+
 }

@@ -9,14 +9,16 @@ import com.ruturaj.backend.modal.Like;
 
 @Repository
 public interface LikeRepository extends JpaRepository<Like, Long> {
-    List<Like> getByUserId(Long userId);
+    List<Like> findLikeByUserId(Long userId);
 
-    List<Like> getByPostId(Long postId);
+    List<Like> findByPostId(Long postId);
 
     boolean existsByPostId(long postId);
 
     Boolean existsByUserIdAndPostId(Long userId, long postId);
 
     void deleteByPostId(Long postId);
+
+    Like findByUserIdAndPostId(Long userId, Long postId);
 
 }
