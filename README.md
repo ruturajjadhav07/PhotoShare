@@ -120,16 +120,9 @@ https://github.com/ruturajjadhav07/Social-Media-App.git
 ```
 spring.application.name=backend
 
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-<<<<<< MyBranch
-spring.datasource.url=jdbc:mysql://localhost:3306/databasename
-spring.datasource.username=your useername
-spring.datasource.password=your password
-
 spring.datasource.url=jdbc:mysql://localhost:3306/socialmedia
 spring.datasource.username=
 spring.datasource.password=
->>>>>> main
 spring.jpa.show-sql=true
 spring.jpa.hibernate.ddl-auto=update  
 spring.jpa.properties.hibernate.format_sql=true
@@ -150,7 +143,6 @@ mvn clean install
 ```
 mvn spring-boot:run
 ```
-<<<<<< MyBranch
 
 ### Frontend Setup
 1. Navigate to the frontend directory:
@@ -197,7 +189,5 @@ npm start
 
 **[MySQL Documentation](https://dev.mysql.com/doc/)**
 
-
-=======
 The application will be running on http://localhost:8080
->>>>>> main
+
