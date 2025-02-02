@@ -36,6 +36,98 @@ This is a simple social media application built with Spring Boot (backend) and M
 
 ## Project Structure
 
+```
+Directory structure:
+└── ruturajjadhav07-social-media-app/
+    ├── README.md
+    ├── backend/
+    │   ├── mvnw
+    │   ├── mvnw.cmd
+    │   ├── pom.xml
+    │   ├── .gitattributes
+    │   ├── .gitignore
+    │   ├── src/
+    │   │   ├── main/
+    │   │   │   ├── java/
+    │   │   │   │   └── com/
+    │   │   │   │       └── ruturaj/
+    │   │   │   │           └── backend/
+    │   │   │   │               ├── BackendApplication.java
+    │   │   │   │               ├── controller/
+    │   │   │   │               │   ├── CommentController.java
+    │   │   │   │               │   ├── LikeController.java
+    │   │   │   │               │   ├── PostController.java
+    │   │   │   │               │   └── UserController.java
+    │   │   │   │               ├── exception/
+    │   │   │   │               │   └── GlobalExceptionHandler.java
+    │   │   │   │               ├── modal/
+    │   │   │   │               │   ├── Comment.java
+    │   │   │   │               │   ├── Like.java
+    │   │   │   │               │   ├── Post.java
+    │   │   │   │               │   └── User.java
+    │   │   │   │               ├── repository/
+    │   │   │   │               │   ├── CommentRepository.java
+    │   │   │   │               │   ├── LikeRepository.java
+    │   │   │   │               │   ├── PostRepository.java
+    │   │   │   │               │   └── UserRepository.java
+    │   │   │   │               └── service/
+    │   │   │   │                   ├── CommentService.java
+    │   │   │   │                   ├── LikeService.java
+    │   │   │   │                   ├── PostService.java
+    │   │   │   │                   └── UserService.java
+    │   │   │   └── resources/
+    │   │   │       └── application.properties
+    │   │   └── test/
+    │   │       └── java/
+    │   │           └── com/
+    │   │               └── ruturaj/
+    │   │                   └── backend/
+    │   │                       └── BackendApplicationTests.java
+    │   └── .mvn/
+    │       └── wrapper/
+    │           └── maven-wrapper.properties
+    └── frontend/
+        ├── README.md
+        ├── package-lock.json
+        ├── package.json
+        ├── .gitignore
+        ├── public/
+        │   ├── index.html
+        │   ├── manifest.json
+        │   └── robots.txt
+        └── src/
+            ├── App.css
+            ├── App.js
+            ├── App.test.js
+            ├── index.css
+            ├── index.js
+            ├── reportWebVitals.js
+            ├── setupTests.js
+            ├── Component/
+            │   ├── Footer/
+            │   │   └── Footer.js
+            │   ├── User/
+            │   │   ├── UserLogin.js
+            │   │   └── UserSignup.js
+            │   ├── UserActions/
+            │   │   └── UserDelete.js
+            │   ├── UserDetails/
+            │   │   ├── UserDetails.js
+            │   │   └── UserEdit.js
+            │   ├── UserPost/
+            │   │   ├── CommentInput.js
+            │   │   ├── CommentList.js
+            │   │   ├── CommentModal.js
+            │   │   ├── PostItem.js
+            │   │   ├── PostList.js
+            │   │   ├── UserCreatePost.js
+            │   │   ├── UserLike.js
+            │   │   └── UserPost.js
+            │   └── logo/
+            └── Server/
+                └── Server.js
+```
+
 ### Backend
 
 The backend is built using **Spring Boot** and interacts with a **MySQL** database to store user, post, comment, and like data.
