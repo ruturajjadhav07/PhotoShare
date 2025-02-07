@@ -206,7 +206,7 @@ Here are the key React dependencies used in the project:
 ### Backend Setup
 1. Clone the repository:
 ```bash
-https://github.com/ruturajjadhav07/Social-Media-App.git
+https://github.com/ruturajjadhav07/PhotoShare.git
 ```
 2. Navigate to the backend directory and set up your application.properties with your MySQL database credentials:
 ```
